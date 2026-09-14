@@ -1,5 +1,7 @@
-# Haven
+# Haven source files
 
-A property marketplace for buying, renting, and listing homes.
+Start with [README.md](README.md) for setup, features, Firebase activation, and tests.
 
-Source upload in progress. The application uses React, Vinext, Cloudflare Workers, D1, and R2.
+This archive contains application source and migration files. It excludes credentials, dependencies, built output, live database contents, and uploaded property photos.
+
+Firebase project configuration is still required before email sign-in can be activated and tested with a real account.
