@@ -1,8 +1,9 @@
-import {env} from 'cloudflare:workers';
+import {env} from '@/lib/runtime';
 import {cookies} from 'next/headers';
 import {getChatGPTUser, type ChatGPTUser} from './chatgpt-auth';
 import {sameOrigin} from './auth-policy';
 
+export function chatgptAvailable(){return !(env as typeof env & {HAVEN_NODE_RUNTIME?:boolean}).HAVEN_NODE_RUNTIME;}
 export const SESSION_COOKIE = 'haven_session';
 export function firebaseConfig() {
   const config = env as typeof env & {FIREBASE_API_KEY?: string; FIREBASE_PROJECT_ID?: string};
@@ -23,7 +24,7 @@ export async function firebaseRequest(method: string, body: object) {
 export async function getUser(request?: Request): Promise<ChatGPTUser | null> {
   if (request && !['GET','HEAD'].includes(request.method) && !sameOrigin(request)) return null;
   // Keep existing Sites identities until the owner activates Firebase.
-  if (!firebaseEnabled()) return getChatGPTUser();
+  if (!firebaseEnabled()) return chatgptAvailable()?getChatGPTUser():null;
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return null;
   try {

@@ -1,0 +1,5 @@
+{
+  "extends":"./tsconfig.json",
+  "compilerOptions":{"paths":{"@/lib/runtime":["./lib/runtime-node.ts"],"@/*":["./*"]}},
+  "exclude":["node_modules","examples","work","outputs","dist",".wrangler"]
+}

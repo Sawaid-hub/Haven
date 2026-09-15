@@ -13,6 +13,8 @@ A responsive real-estate marketplace for buying, renting, and listing homes. Bui
 
 ## Run locally
 
+**Deploying to Netlify?** See [Netlify setup](docs/NETLIFY.md). Use `npm run build:netlify` and publish `.next`; the normal Sites build produces a different format.
+
 Use Node.js 22.13 or later. Run `npm run install:ci`, then `npm run dev` and open the local URL printed in the terminal.
 
 Apply the existing D1 migrations for a fresh checkout as described in [runtime instructions](docs/STARTER.md#local-d1-migrations). Run `npm run build` first if the generated Wrangler configuration is missing. Never replay an already applied migration.

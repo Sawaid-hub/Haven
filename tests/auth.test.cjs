@@ -10,7 +10,7 @@ function fixture({enabled=true,token='',reply={ok:true,data:{users:[{localId:'te
  const context={Response,Request,URL,AbortSignal,atob,Date,console,process:{env:{}},fetch:async(url,options)=>{calls.push({url,body:JSON.parse(options.body)});return Response.json(reply.data,{status:reply.ok?200:400})}};
  function load(path){
   if(cache[path])return cache[path];
-  if(path==='cloudflare:workers')return {env:enabled?{FIREBASE_API_KEY:'test-key',FIREBASE_PROJECT_ID:'haven-test'}:{}};
+  if(path==='cloudflare:workers'||path==='@/lib/runtime')return {env:enabled?{FIREBASE_API_KEY:'test-key',FIREBASE_PROJECT_ID:'haven-test'}:{}};
   if(path==='next/headers')return {cookies:async()=>({get:()=>token?{value:token==='valid'?makeToken():token}:undefined})};
   if(path.endsWith('chatgpt-auth'))return {getChatGPTUser:async()=>null};
   if(path==='zod')return require('zod');

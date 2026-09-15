@@ -3,6 +3,8 @@ import { fileURLToPath } from "node:url";
 import { readExecutionProfile } from "./execution-profile.mjs";
 
 const [command, ...args] = process.argv.slice(2);
+// Keep native Worker bindings when Vinext reads the shared Next.js config.
+process.env.HAVEN_SITES_BUILD = '1';
 if (!["dev", "build"].includes(command)) throw new Error("Expected dev or build.");
 const managedLinux = readExecutionProfile() === "managed-linux";
 

@@ -1,11 +1,11 @@
-import {firebaseEnabled, firebaseRequest, getUser, SESSION_COOKIE} from '../../firebase-auth';
+import {chatgptAvailable, firebaseEnabled, firebaseRequest, getUser, SESSION_COOKIE} from '../../firebase-auth';
 import {sameOrigin} from '../../auth-policy';
 import {z} from 'zod';
 export const dynamic = 'force-dynamic';
 const noStore = {'Cache-Control':'no-store'};
 export async function GET() {
   const user = await getUser();
-  return Response.json({enabled:firebaseEnabled(), user:user ? {email:user.email, displayName:user.displayName} : null}, {headers:noStore});
+  return Response.json({enabled:firebaseEnabled(), chatgptAvailable:chatgptAvailable(), user:user ? {email:user.email, displayName:user.displayName} : null}, {headers:noStore});
 }
 export async function POST(request: Request) {
   if (!sameOrigin(request)) return Response.json({error:'Please submit this form from Haven.'},{status:403,headers:noStore});

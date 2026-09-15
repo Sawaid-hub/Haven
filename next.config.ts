@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  typescript: {tsconfigPath:process.env.HAVEN_SITES_BUILD === '1' ? 'tsconfig.json' : 'tsconfig.next.json'},
 };
 
 export default nextConfig;
